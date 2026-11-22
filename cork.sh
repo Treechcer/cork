@@ -1,6 +1,7 @@
 #!/bin/bash
 
-LIBFOLDER="./subLibs"
+LIBFOLDER="$(dirname "$(readlink -f "$0")")/subLibs"
+echo "$LIBFOLDER"
 
 args=("$@")
 argCount=${#args[@]}
@@ -8,7 +9,7 @@ argCount=${#args[@]}
 i=0
 while [ $i -lt $argCount ]; do
     if [ "${args[i]}" = "-lc" ]; then
-        find . -name "${args[i+1]}" | xargs wc -l
+        source "$LIBFOLDER/LineCounter.sh" "${args[i+1]}"
         i=$((i + 1))
     else
         echo "Unknown input ${args[i]}"
