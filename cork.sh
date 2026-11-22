@@ -8,7 +8,7 @@ argCount=${#args[@]}
 i=0
 while [ $i -lt $argCount ]; do
     if [ "${args[i]}" = "-lc" ]; then
-        source "$LIBFOLDER/LineCounter.sh" "${args[i+1]}"
+        find . -name "${args[i+1]}" | xargs wc -l
         i=$((i + 1))
     else
         echo "Unknown input ${args[i]}"
